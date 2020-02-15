@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Verificador de Palíndromo</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <section style="padding-top: 40px;">
+      <div class="container">
+        <div class="card">
+          <div
+            class="card-header d-flex justify-content-between align-items-center"
+          >
+            Verificador de Palíndromo
+            <button
+              type="button"
+              class="btn btn-light btn-sm"
+              id="delete-history"
+              data-test="limpar-dados"
+            >
+              Apagar histórico
+            </button>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="palindrome-phrase"
+                  name="palindrome-phrase"
+                  data-test="entrada"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        <table class="table table-striped table-bordered" id="palindrome-table">
+          <thead>
+            <tr>
+              <th scope="col">Frase</th>
+              <th scope="col">Palíndromo</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+    <script>
+      const deleteHistoryButton = document.querySelector('#delete-history');
+      const palindromePhraseInput = document.querySelector(
+        '#palindrome-phrase'
+      );
+      const palindromeTable = document.querySelector('#palindrome-table');
+
+      function handleDeleteHistory() {
+        const tbody = palindromeTable.children[1];
+        while (tbody.firstChild) {
+          tbody.firstChild.remove();
+        }
+      }
+
+      function handleInputPalindromePhrase(event) {
+        phrase = palindromePhraseInput.value;
+
+        if (event.key !== 'Enter' && !isEmpty(phrase)) {
+          return null;
+        }
+
+        event.preventDefault();
+
+        isPalindrome = checkPalindrome(phrase);
+
+        const data = { phrase, isPalindrome };
+        createDataTable(data);
+
+        palindromePhraseInput.value = '';
+      }
+
+      function isEmpty(value) {
+        return value.replace(/^\s+|\s+$/g, '').length === 0;
+      }
+
+      function createDataTable(data) {
+        const tableRow = createTableRow();
+        const tableDataPhrase = createTableData(data.phrase);
+        const tableDataAnswer = createTableData(data.isPalindrome);
+
+        tableRow.appendChild(tableDataPhrase);
+        tableRow.appendChild(tableDataAnswer);
+
+        palindromeTable.children[1].appendChild(tableRow);
+      }
+
+      function createTableRow() {
+        const row = document.createElement('tr');
+        return row;
+      }
+
+      function createTableData(value) {
+        const data = document.createElement('td');
+
+        if (typeof value === 'string') {
+          data.textContent = value;
+          return data;
+        }
+
+        data.textContent = isPalindrome ? 'Sim' : 'Não';
+        data.setAttribute(
+          'data-verificado',
+          isPalindrome ? 'positivo' : 'negativo'
+        );
+        return data;
+      }
+
+      function cleanPhrase(phrase) {
+        return phrase.toLowerCase().replace(/[^A-Za-z0-9]/g, '');
+      }
+
+      function checkPalindrome(phrase) {
+        const cleanedPhrase = cleanPhrase(phrase);
+        const reversedPhrase = cleanedPhrase
+          .split('')
+          .reverse()
+          .join('');
+
+        return cleanedPhrase === reversedPhrase;
+      }
+
+      deleteHistoryButton.addEventListener('click', handleDeleteHistory);
+      palindromePhraseInput.addEventListener(
+        'keypress',
+        handleInputPalindromePhrase
+      );
+    </script>
+  </body>
+</html>

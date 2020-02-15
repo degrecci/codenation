@@ -1,0 +1,20 @@
+{
+  "name": "test_files",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "exec": "jest --json",
+    "server": "http-server ./public -p 1337",
+    "submit": "codenation-jest-score ./score-map.json"
+  },
+  "devDependencies": {
+    "http-server": "0.9.0",
+    "jest": "^24.8.0",
+    "jest-puppeteer": "^4.2.0",
+    "puppeteer": "^1.17.0"
+  },
+  "dependencies": {
+    "codenation-jest-score": "https://github.com/thecodenation/codenation-jest-score/tarball/master"
+  }
+}
