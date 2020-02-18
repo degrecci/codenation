@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { string } from 'yup';
-import { Container, Heading, Section, Loader } from 'react-bulma-components';
+import { Container, Heading, Section } from 'react-bulma-components';
 import { getRepositories } from './services';
 import Form from './Form';
 import ListRepositories from './ListRepositories';
@@ -10,6 +10,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [repositories, setRepositories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [is404, setIs404] = useState(false);
   const alphanumericRegex = /^[a-zA-Z0-9-]*$/;
 
   const schema = string()
@@ -21,6 +22,20 @@ function App() {
     setUsername(event.target.value);
   };
 
+  const listRepositories = async () => {
+    const { repositories, status } = await getRepositories({ username });
+    setIs404(false);
+
+    if (status === 200) {
+      return setRepositories(repositories);
+    }
+
+    if (status === 404) {
+      setIs404(true);
+      return setRepositories([]);
+    }
+  };
+
   const handleSubmit = async event => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -30,8 +45,7 @@ function App() {
 
       if (isValidUsername) {
         setIsLoading(true);
-        const repositories = await getRepositories({ username });
-        setRepositories(repositories);
+        await listRepositories();
         setIsLoading(false);
       }
     }
@@ -53,6 +67,7 @@ function App() {
           handleSubmit={handleSubmit}
           isLoading={isLoading}
         />
+        {is404 && <div>404</div>}
         <ListRepositories repositories={repositories} />
       </Container>
     </Section>
