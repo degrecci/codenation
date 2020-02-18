@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { string } from 'yup';
-import { Container, Heading, Section } from 'react-bulma-components';
+import { Container, Heading, Section, Loader } from 'react-bulma-components';
 import { getRepositories } from './services';
+import Form from './Form';
+import ListRepositories from './ListRepositories';
 
 function App() {
   const [username, setUsername] = useState('');
   const [hasError, setHasError] = useState(false);
+  const [repositories, setRepositories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const alphanumericRegex = /^[a-zA-Z0-9-]*$/;
 
   const schema = string()
@@ -21,13 +25,14 @@ function App() {
     if (event.key === 'Enter') {
       event.preventDefault();
       event.stopPropagation();
-
       const isValidUsername = await schema.isValid(username);
       setHasError(!isValidUsername);
 
       if (isValidUsername) {
+        setIsLoading(true);
         const repositories = await getRepositories({ username });
-        console.log(repositories);
+        setRepositories(repositories);
+        setIsLoading(false);
       }
     }
   };
@@ -41,21 +46,14 @@ function App() {
         <Heading subtitle renderAs="p">
           Veja os respositórios do seu usuário favorito!
         </Heading>
-        <form>
-          <div className="field">
-            <div className="control">
-              <input
-                className={`input${hasError ? ' is-danger' : ''}`}
-                type="text"
-                name="user"
-                placeholder="Digite um usuário do github"
-                value={username}
-                onChange={handleUsername}
-                onKeyPress={handleSubmit}
-              />
-            </div>
-          </div>
-        </form>
+        <Form
+          hasError={hasError}
+          username={username}
+          handleUsername={handleUsername}
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+        />
+        <ListRepositories repositories={repositories} />
       </Container>
     </Section>
   );
