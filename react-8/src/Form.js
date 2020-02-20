@@ -24,6 +24,7 @@ export default function Form({
             value={username}
             onChange={handleUsername}
             onKeyPress={handleSubmit}
+            data-test="entrada"
           />
         </div>
       </div>

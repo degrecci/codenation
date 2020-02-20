@@ -10,7 +10,7 @@ import {
 
 export default function ListRepositories({ repositories }) {
   return (
-    <Columns style={{ marginTop: '10px' }}>
+    <Columns style={{ marginTop: '10px' }} data-test="repositorio">
       {repositories.map(repository => (
         <Columns.Column size={4} key={repository.id}>
           <Card>

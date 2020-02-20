@@ -11,7 +11,8 @@ function App() {
   const [repositories, setRepositories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [is404, setIs404] = useState(false);
-  const alphanumericRegex = /^[a-zA-Z0-9-]*$/;
+  const [isEmptyRepositories, setIsEmptyRepositories] = useState(false);
+  const alphanumericRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
   const schema = string()
     .required('Campo requerido')
@@ -25,8 +26,10 @@ function App() {
   const listRepositories = async () => {
     const { repositories, status } = await getRepositories({ username });
     setIs404(false);
+    setIsEmptyRepositories(false);
 
     if (status === 200) {
+      setIsEmptyRepositories(repositories.length < 1 ? true : false);
       return setRepositories(repositories);
     }
 
@@ -67,8 +70,13 @@ function App() {
           handleSubmit={handleSubmit}
           isLoading={isLoading}
         />
-        {is404 && <div>404</div>}
-        <ListRepositories repositories={repositories} />
+        {is404 && <div data-test="nao-encontrado">404</div>}
+        {isEmptyRepositories && (
+          <div data-test="sem-repositorios">Sem repositórios</div>
+        )}
+        {repositories.length > 0 && (
+          <ListRepositories repositories={repositories} />
+        )}
       </Container>
     </Section>
   );
