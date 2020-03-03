@@ -3,7 +3,7 @@ import { string } from 'yup';
 import { Container, Heading, Section } from 'react-bulma-components';
 import { getRepositories } from './services';
 import Form from './Form';
-import ListRepositories from './ListRepositories';
+import RepositoryCard from './RepositoryCard';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -74,9 +74,12 @@ function App() {
         {isEmptyRepositories && (
           <div data-test="sem-repositorios">Sem repositórios</div>
         )}
-        {repositories.length > 0 && (
-          <ListRepositories repositories={repositories} />
-        )}
+        {repositories.length > 0 &&
+          repositories.map(repository => (
+            <Container data-test="repositorio">
+              <RepositoryCard repository={repository} />
+            </Container>
+          ))}
       </Container>
     </Section>
   );
