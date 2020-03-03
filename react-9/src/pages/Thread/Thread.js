@@ -31,9 +31,11 @@ function Thread({ match }) {
 
   return (
     <div>
-      <Link to="/">Voltar</Link>
+      <Link to="/" data-test="voltar">
+        Voltar
+      </Link>
       {!isLoading && (
-        <div>
+        <div data-test="resposta">
           <h3>{thread.title}</h3>
           <p>{thread.body}</p>
           <p>{thread.total_replies}</p>

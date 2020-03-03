@@ -16,10 +16,12 @@ function Home() {
   return (
     <div>
       {threads.map((thread, index) => (
-        <ul key={index}>
+        <ul key={index} data-test="thread">
           <li>{thread.title}</li>
           <li>{thread.total_replies}</li>
-          <Link to={`/thread/${thread.slug}`}>Continue lendo</Link>
+          <Link to={`/thread/${thread.slug}`} data-test="link">
+            Continue lendo
+          </Link>
         </ul>
       ))}
     </div>

@@ -18,7 +18,9 @@ const Routes = () => (
         path="/404"
         render={() => (
           <div>
-            <Link to="/">Voltar</Link>
+            <Link to="/" data-test="voltar">
+              Voltar
+            </Link>
             <h2>Not found!</h2>
           </div>
         )}
