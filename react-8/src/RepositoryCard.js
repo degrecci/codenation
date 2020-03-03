@@ -16,7 +16,11 @@ export default function RepositoryCard({ repository }) {
             </Heading>
           </Media.Item>
         </Media>
-        <Content>{repository.description}</Content>
+        <Content>
+          {repository.description} - Stars: {repository.stargazers_count}
+          <br />
+          <a href={repository.url}>Link para o repo</a>
+        </Content>
       </Card.Content>
     </Card>
   );
