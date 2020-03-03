@@ -10,8 +10,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [repositories, setRepositories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [is404, setIs404] = useState(false);
-  const [isEmptyRepositories, setIsEmptyRepositories] = useState(false);
+  const [response, setResponse] = useState('');
   const alphanumericRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
   const schema = string()
@@ -25,16 +24,15 @@ function App() {
 
   const listRepositories = async () => {
     const { repositories, status } = await getRepositories({ username });
-    setIs404(false);
-    setIsEmptyRepositories(false);
+    setResponse('');
+    setRepositories(repositories);
 
-    if (status === 200) {
-      setIsEmptyRepositories(repositories.length < 1 ? true : false);
-      return setRepositories(repositories);
+    if (repositories.length < 1) {
+      return setResponse('empty');
     }
 
     if (status === 404) {
-      setIs404(true);
+      setResponse('404');
       return setRepositories([]);
     }
   };
@@ -70,13 +68,13 @@ function App() {
           handleSubmit={handleSubmit}
           isLoading={isLoading}
         />
-        {is404 && <div data-test="nao-encontrado">404</div>}
-        {isEmptyRepositories && (
+        {response === '404' && <div data-test="nao-encontrado">404</div>}
+        {response === 'empty' && (
           <div data-test="sem-repositorios">Sem repositórios</div>
         )}
         {repositories.length > 0 &&
           repositories.map(repository => (
-            <Container data-test="repositorio">
+            <Container data-test="repositorio" key={repository.id}>
               <RepositoryCard repository={repository} />
             </Container>
           ))}
