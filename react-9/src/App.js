@@ -6,12 +6,7 @@ import Routes from "./routes";
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <Link to="/">Home</Link>
-        <Link to="/sobre" style={{ marginLeft: 8 }}>
-          Sobre
-        </Link>
-      </header>
+      <h1>Fórum</h1>
       <Routes />
     </BrowserRouter>
   );
