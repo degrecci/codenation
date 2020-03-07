@@ -3,17 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@koa/cors": "^2.2.3",
     "axios": "^0.19.0",
-    "codenation-jest-score": "https://github.com/thecodenation/codenation-jest-score/tarball/master",
-    "faker": "^4.1.0",
-    "koa": "^2.7.0",
-    "koa-route": "^3.2.0",
+    "codenation-jest-score": "^1.0.2",
     "react": "^16.9.0",
     "react-bulma-components": "^2.3.0",
+	"react-redux": "^7.1.1",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "redux": "^4.0.4",
+    "redux-persist": "^6.0.0",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
@@ -27,9 +26,8 @@
     "test": "cross-env react-scripts test --env=jsdom",
     "test:e2e": "jest -c jest.config.js --detectOpenHandles",
     "eject": "react-scripts eject",
-    "exec": "jest -c jest.config.js --detectOpenHandles --json",
-    "submit": "codenation-jest-score ./score-map.json",
-    "api": "cross-env API_PORT=1338 node api"
+    "exec": "jest --json",
+    "submit": "codenation-jest-score ./score-map.json"
   },
   "eslintConfig": {
     "extends": "react-app"
