@@ -1,18 +1,15 @@
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import Routes from "./routes";
+import Card from "./components/Card";
 
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <Link to="/">Home</Link>
-        <Link to="/sobre" style={{ marginLeft: 8 }}>
-          Sobre
-        </Link>
-      </header>
-      <Routes />
+      <Card>
+        <Routes />
+      </Card>
     </BrowserRouter>
   );
 }
