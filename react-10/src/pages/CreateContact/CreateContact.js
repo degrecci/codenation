@@ -1,7 +1,9 @@
-import React from "react";
-import ButtonLink from "../../components/ButtonLink";
-import Card from "../../components/Card";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+import Button, { ButtonLink } from "../../components/Button";
+import Card from "../../components/Card";
+import Input from "../../components/Input/Input";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -9,18 +11,36 @@ const ButtonContainer = styled.div`
 `;
 
 function CreateContact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
   return (
     <div>
       <Card.Header>
         <Card.Title>Novo contato</Card.Title>
         <ButtonContainer>
           <ButtonLink to="/">Voltar</ButtonLink>
-          <ButtonLink to="/" bgColor="#57DA64" color="#fff">
+          <Button onClick={() => {}} bgColor="#57DA64" color="#fff">
             Criar contato
-          </ButtonLink>
+          </Button>
         </ButtonContainer>
       </Card.Header>
-      <Card.Body>Você não tem contatos cadastrados</Card.Body>
+      <Card.Body>
+        <Input
+          label="Nome"
+          type="text"
+          name="name"
+          onChange={event => setName(event.target.value)}
+          value={name}
+        />
+        <Input
+          label="E-mail"
+          type="email"
+          name="email"
+          onChange={event => setEmail(event.target.value)}
+          value={email}
+        />
+      </Card.Body>
     </div>
   );
 }

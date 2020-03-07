@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonLink from "../../components/ButtonLink";
+import { ButtonLink } from "../../components/Button";
 import Card from "../../components/Card";
 
 const Contacts = () => (

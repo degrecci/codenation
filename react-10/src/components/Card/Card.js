@@ -21,6 +21,7 @@ const Title = styled.h1`
 
 const Body = styled.div`
   padding-top: 20px;
+  font-size: 0.6em;
 `;
 
 Card.Header = Header;
