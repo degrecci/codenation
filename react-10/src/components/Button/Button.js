@@ -10,7 +10,7 @@ function ButtonLink({ children, onClick, type, bgColor, color }) {
     margin: 0;
     width: auto;
     overflow: visible;
-    font-size: 0.6em;
+    font-size: 15px;
     font-weight: 500;
     padding: 5px 10px;
     text-decoration: none;

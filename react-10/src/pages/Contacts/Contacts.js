@@ -1,6 +1,8 @@
 import React from "react";
+
 import { ButtonLink } from "../../components/Button";
 import Card from "../../components/Card";
+import { ReactComponent as PlusIcon } from "../../assets/icons/add.svg";
 
 const Contacts = () => (
   <div>

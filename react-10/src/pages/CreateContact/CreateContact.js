@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import Button, { ButtonLink } from "../../components/Button";
 import Card from "../../components/Card";
@@ -13,6 +14,11 @@ const ButtonContainer = styled.div`
 function CreateContact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+
+  const createContact = () => {
+    dispatch({ type: "CREATE_CONTACT", payload: { name, email } });
+  };
 
   return (
     <div>
@@ -20,7 +26,7 @@ function CreateContact() {
         <Card.Title>Novo contato</Card.Title>
         <ButtonContainer>
           <ButtonLink to="/">Voltar</ButtonLink>
-          <Button onClick={() => {}} bgColor="#57DA64" color="#fff">
+          <Button onClick={createContact} bgColor="#57DA64" color="#fff">
             Criar contato
           </Button>
         </ButtonContainer>
