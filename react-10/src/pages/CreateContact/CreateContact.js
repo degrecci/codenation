@@ -11,13 +11,14 @@ const ButtonContainer = styled.div`
   align-items: center;
 `;
 
-function CreateContact() {
+function CreateContact({ history }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 
   const createContact = () => {
     dispatch({ type: "CREATE_CONTACT", payload: { name, email } });
+    history.push("/");
   };
 
   return (

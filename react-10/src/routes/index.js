@@ -9,7 +9,11 @@ const Routes = () => (
   <>
     <Switch>
       <Route exact path="/" component={Contacts}></Route>
-      <Route exact path="/create" component={CreateContact}></Route>
+      <Route
+        exact
+        path="/create"
+        component={({ history }) => <CreateContact history={history} />}
+      ></Route>
       {/* <Route exact path="/:contato_id/edit" component={<div>Edit</div>}></Route> */}
       <Route exact path="/404" render={NotFound}></Route>
       <Route path="*" render={() => <Redirect to="/404" />}></Route>

@@ -7,10 +7,17 @@ const rootPersistConfig = {
   storage: storage
 };
 
-function contactReducer(initialState = {}, action) {
-  switch (action.type)
+const initialState = [];
+
+function contacts(state = initialState, action) {
+  switch (action.type) {
+    case "CREATE_CONTACT":
+      return [...state, { ...action.payload }];
+    default:
+      return state;
+  }
 }
 
-const rootReducer = combineReducers({ contactReducer });
+const rootReducer = combineReducers({ contacts });
 
 export default persistReducer(rootPersistConfig, rootReducer);
