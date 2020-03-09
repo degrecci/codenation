@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function ButtonLink({ children, onClick, type, bgColor, color }) {
+function ButtonLink({ children, onClick, type, bgColor, color, dataTest }) {
   const Button = styled.button`
     background-color: ${bgColor || "transparent"};
     color: ${color || "#000"};
@@ -18,7 +18,7 @@ function ButtonLink({ children, onClick, type, bgColor, color }) {
   `;
 
   return (
-    <Button onClick={onClick} type={type}>
+    <Button onClick={onClick} type={type} data-test={dataTest}>
       {children}
     </Button>
   );

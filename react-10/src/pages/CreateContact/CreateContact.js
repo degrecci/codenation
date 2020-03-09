@@ -27,7 +27,12 @@ function CreateContact({ history }) {
         <Card.Title>Novo contato</Card.Title>
         <ButtonContainer>
           <ButtonLink to="/">Voltar</ButtonLink>
-          <Button onClick={createContact} bgColor="#57DA64" color="#fff">
+          <Button
+            onClick={createContact}
+            bgColor="#57DA64"
+            color="#fff"
+            dataTest="criar"
+          >
             Criar contato
           </Button>
         </ButtonContainer>
@@ -37,6 +42,7 @@ function CreateContact({ history }) {
           label="Nome"
           type="text"
           name="name"
+          dataTest="nome"
           onChange={event => setName(event.target.value)}
           value={name}
         />
@@ -44,6 +50,7 @@ function CreateContact({ history }) {
           label="E-mail"
           type="email"
           name="email"
+          dataTest="email"
           onChange={event => setEmail(event.target.value)}
           value={email}
         />

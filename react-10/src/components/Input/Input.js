@@ -20,10 +20,16 @@ const StyledLabel = styled.label`
   color: #333;
 `;
 
-const Input = ({ label, type, name, onChange, value }) => (
+const Input = ({ label, type, name, onChange, value, dataTest }) => (
   <Field>
     <StyledLabel>{label}</StyledLabel>
-    <StyledInput type={type} name={name} onChange={onChange} value={value} />
+    <StyledInput
+      type={type}
+      name={name}
+      onChange={onChange}
+      value={value}
+      data-test={dataTest}
+    />
   </Field>
 );
 

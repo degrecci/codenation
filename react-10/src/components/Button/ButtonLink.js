@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-function ButtonLink({ children, to, type, bgColor, color }) {
+function ButtonLink({ children, to, type, bgColor, color, dataTest }) {
   const StyledLink = styled(Link)`
     background-color: ${bgColor || "transparent"};
     color: ${color || "#000"};
@@ -19,7 +19,7 @@ function ButtonLink({ children, to, type, bgColor, color }) {
   `;
 
   return (
-    <StyledLink to={to} type={type}>
+    <StyledLink to={to} type={type} data-test={dataTest}>
       {children}
     </StyledLink>
   );
