@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -24,8 +25,29 @@ const Body = styled.div`
   font-size: 0.6em;
 `;
 
+const Contact = ({ children, contact }) => {
+  const StyledContact = styled.div`
+    display: flex;
+    justify-content: space-between;
+  `;
+  const StyledChild = styled.div`
+    display: flex;
+    align-items: center;
+  `;
+  return (
+    <StyledContact>
+      <div>
+        <p>{contact.name}</p>
+        <p>{contact.email}</p>
+      </div>
+      <StyledChild>{children}</StyledChild>
+    </StyledContact>
+  );
+};
+
 Card.Header = Header;
 Card.Title = Title;
 Card.Body = Body;
+Card.Contact = Contact;
 
 export default Card;

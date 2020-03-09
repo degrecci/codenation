@@ -1,16 +1,20 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { ButtonLink } from "../../components/Button";
+import Button, { ButtonLink } from "../../components/Button";
 import Card from "../../components/Card";
 
 function Contacts() {
   const contacts = useSelector(store => store.contacts);
+  const contactsTotal = contacts.length;
 
   return (
     <div>
       <Card.Header>
-        <Card.Title>Contatos</Card.Title>
+        <Card.Title>
+          Contatos{" "}
+          <span data-test={`total-${contactsTotal}`}>({contactsTotal})</span>
+        </Card.Title>
         <ButtonLink
           bgColor="#6FB0FC"
           color="#fff"
@@ -21,17 +25,15 @@ function Contacts() {
         </ButtonLink>
       </Card.Header>
       <Card.Body>
-        {contacts.length < 1 && (
+        {contactsTotal < 1 && (
           <div data-test="sem-contatos">Você não tem contatos cadastrados</div>
         )}
-        {contacts.length > 0 &&
+        {contactsTotal > 0 &&
           contacts.map((contact, index) => (
-            <div key={index}>
-              <p>
-                <strong>{contact.name}</strong>
-              </p>
-              <p>{contact.email}</p>
-            </div>
+            <Card.Contact key={index} contact={contact}>
+              <Button bgColor="#ccc">Editar</Button>
+              <Button bgColor="#ff9393">Deletar</Button>
+            </Card.Contact>
           ))}
       </Card.Body>
     </div>
