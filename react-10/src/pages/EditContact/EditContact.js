@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,12 +13,10 @@ const ButtonContainer = styled.div`
 
 function EditContact({ history, match }) {
   const contactId = match.params.contato_id;
-  const contacts = useSelector(store => store.contacts);
-
-  const initialContact = contacts[contactId];
-  const [name, setName] = useState(initialContact.name);
-  const [email, setEmail] = useState(initialContact.email);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
+  const contacts = useSelector(store => store.contacts);
 
   const editContact = index => {
     dispatch({
@@ -27,6 +25,17 @@ function EditContact({ history, match }) {
     });
     history.push("/");
   };
+
+  useEffect(() => {
+    const initialContact = contacts[contactId];
+
+    if (!initialContact) {
+      return history.push("/404");
+    }
+
+    setName(initialContact.name);
+    setEmail(initialContact.email);
+  }, [contactId, contacts, history]);
 
   return (
     <div>

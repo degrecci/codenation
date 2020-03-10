@@ -35,12 +35,16 @@ function Contacts() {
         {contactsTotal > 0 &&
           contacts.map((contact, index) => (
             <Card.Contact key={index} contact={contact}>
-              <ButtonLink bgColor="#ccc" to={`/${index}/edit`}>
+              <ButtonLink
+                bgColor="#ccc"
+                to={`/${index}/edit`}
+                dataTest="editar"
+              >
                 Editar
               </ButtonLink>
               <Button
                 bgColor="#ff9393"
-                dataTest="deletar"
+                dataTest="apagar"
                 onClick={() => deleteContact(index)}
               >
                 Deletar
