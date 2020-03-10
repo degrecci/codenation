@@ -1,12 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Button, { ButtonLink } from "../../components/Button";
 import Card from "../../components/Card";
 
 function Contacts() {
   const contacts = useSelector(store => store.contacts);
+  const dispatch = useDispatch();
   const contactsTotal = contacts.length;
+
+  const deleteContact = index =>
+    dispatch({ type: "DELETE_CONTACT", payload: { index } });
 
   return (
     <div>
@@ -32,7 +36,13 @@ function Contacts() {
           contacts.map((contact, index) => (
             <Card.Contact key={index} contact={contact}>
               <Button bgColor="#ccc">Editar</Button>
-              <Button bgColor="#ff9393">Deletar</Button>
+              <Button
+                bgColor="#ff9393"
+                dataTest="deletar"
+                onClick={() => deleteContact(index)}
+              >
+                Deletar
+              </Button>
             </Card.Contact>
           ))}
       </Card.Body>

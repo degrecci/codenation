@@ -13,6 +13,11 @@ function contacts(state = initialState, action) {
   switch (action.type) {
     case "CREATE_CONTACT":
       return [...state, { ...action.payload }];
+    case "DELETE_CONTACT":
+      return [
+        ...state.slice(0, action.payload.index),
+        ...state.slice(action.payload.index + 1)
+      ];
     default:
       return state;
   }
