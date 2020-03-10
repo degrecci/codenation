@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Contacts } from "../pages/Contacts";
 import { CreateContact } from "../pages/CreateContact";
+import { EditContact } from "../pages/EditContact";
 import { NotFound } from "../pages/NotFound";
 
 const Routes = () => (
@@ -14,7 +15,13 @@ const Routes = () => (
         path="/create"
         component={({ history }) => <CreateContact history={history} />}
       ></Route>
-      {/* <Route exact path="/:contato_id/edit" component={<div>Edit</div>}></Route> */}
+      <Route
+        exact
+        path="/:contato_id/edit"
+        component={({ history, match }) => (
+          <EditContact history={history} match={match} />
+        )}
+      ></Route>
       <Route exact path="/404" render={NotFound}></Route>
       <Route path="*" render={() => <Redirect to="/404" />}></Route>
     </Switch>

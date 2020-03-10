@@ -18,6 +18,13 @@ function contacts(state = initialState, action) {
         ...state.slice(0, action.payload.index),
         ...state.slice(action.payload.index + 1)
       ];
+    case "EDIT_CONTACT":
+      return state.map((item, index) => {
+        if (index === action.payload.index) {
+          return { ...action.payload.contact };
+        }
+        return item;
+      });
     default:
       return state;
   }
